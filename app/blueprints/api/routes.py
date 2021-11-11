@@ -6,14 +6,14 @@ from app.blueprints.main.models import Post
 
 # All posts
 
-
 @api.route('/posts', methods=['GET'])
 def get_posts():
     """
     [GET] /api/posts
     """
     posts = [p.to_dict() for p in Post.query.all()]
-    return jsonify(posts)
+    print(posts[0])
+    return jsonify({ 'messages':posts })
 
 # Single posts
 
@@ -38,6 +38,8 @@ def create_post():
     p.from_dict(request.json)
     p.save()
     return jsonify({'message': 'CREATED POST'})
+    # return jsonify(post.to_dict())
+
 
 # Updating existing posts
 
@@ -45,7 +47,7 @@ def create_post():
 @api.route('/post/<id>', methods=['PUT'])
 def update_post(id):
     """
-    [PUT] /api/posts
+    [PUT] /api/post/<id>
     """
     post = Post.query.get(id)
     post.from_dict(request.json)
@@ -74,4 +76,4 @@ def get_users():
     [GET] /api/users
     """
     users = [u.to_dict() for u in User.query.all()]
-    return jsonify(users)
+    return jsonify({ 'users':users })

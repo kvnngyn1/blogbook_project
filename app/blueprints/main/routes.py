@@ -5,14 +5,16 @@ from flask import request, flash, redirect, url_for, render_template
 from app.blueprints.main.models import Post
 from .import bp as app
 
+
 @app.route('/', methods=['GET', 'POST'])
 def home():
     print(current_user) if current_user else None
     # adds ability to add a post into sql database
     if request.method == 'POST':
         p = Post(
-        body=request.form.get('body'),
-        user_id=request.form.get('user_id')
+            body=request.form.get('body'),
+            user_id= current_user.id
+            # user_id= User.query.get(current_user.id)
         )
         db.session.add(p)
         db.session.commit()
