@@ -65,11 +65,14 @@ def logout():
 @app.route('/profile', methods=['GET', 'POST'])
 def profile():
     if request.method == 'POST':
+        # current_user.update_profile(request.form)
         u = User.query.get(current_user.id)
         u.first_name = request.form.get('first_name')
         u.last_name = request.form.get('last_name')
         u.email = request.form.get('email')
+        u.bio = request.form.get('bio')
         db.session.commit()
+
         flash('NOICE! UPDATE COMPLETE!', 'info')
         return redirect(url_for('auth.profile'))
     return render_template('profile.html')

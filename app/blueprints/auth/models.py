@@ -9,6 +9,8 @@ class User(UserMixin, db.Model):
     last_name = db.Column(db.String(50))
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(250))
+    bio = db.Column(db.Text)
+    # added bio column in here (have to commit and upgrade)
     posts = db.relationship('Post', backref='user', lazy='dynamic')
 
     def create_password_hash(self, new_password):
@@ -41,6 +43,13 @@ class User(UserMixin, db.Model):
         for field in ['first_name', 'last_name', 'email', 'password']:
             if field in data:
                 setattr(self, field, data[field])
+
+    def update_profile(self, data):
+        for field in ['first_name', 'last_name', 'email', 'bio']:
+            if field in data:
+                setattr(self, field, data[field])
+                db.session.commit()
+
 
 @login_manager.user_loader
 def load_user(user_id):
