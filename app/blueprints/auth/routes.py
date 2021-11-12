@@ -1,7 +1,7 @@
 from app.blueprints.auth.models import User
 from .import bp as app
 from flask import request, flash, redirect, url_for, render_template
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 from app import db
 
 
@@ -57,12 +57,14 @@ def register():
     return render_template('register.html')
 
 @app.route('/logout')
+@login_required
 def logout():
     logout_user()
     flash('You have logged out successfully', 'primary')
     return redirect(url_for('main.home'))
 
 @app.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile():
     if request.method == 'POST':
         # current_user.update_profile(request.form)

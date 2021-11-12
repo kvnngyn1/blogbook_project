@@ -19,6 +19,9 @@ def create_app(config_class=Config):
     login_manager.init_app(app)
 
     with app.app_context():
+        # no longer needed because app (routes and models) folders do not exist anymore
+        # instead blueprints handles this portion
+        # more organized/modular
         # from .import routes, models
 
         from app.blueprints.auth import bp as auth
