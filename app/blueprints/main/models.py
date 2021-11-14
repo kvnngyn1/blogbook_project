@@ -26,6 +26,7 @@ class Post(db.Model):
             'id': self.id,
             'body': self.body,
             'date_created': self.date_created,
+            'user_id': self.user_id,
             'user': User.query.get(self.user_id).to_dict()
         }
         return data

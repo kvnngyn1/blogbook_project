@@ -21,10 +21,6 @@ def get_poster():
 # TEST ROUTE
 
 
-
-
-
-
 # All posts
 @api.route('/posts', methods=['GET'])
 def get_posts():

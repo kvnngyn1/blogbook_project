@@ -32,7 +32,8 @@ class User(UserMixin, db.Model):
             'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
-            'email': self.email
+            'email': self.email,
+            'bio': self.bio
             # 'posts': self.posts.all()
             # 'posts': [p.to_dict() for p in Post.query.filter_by(user_id=self.id).all()]
         }
