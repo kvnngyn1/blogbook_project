@@ -15,7 +15,7 @@ def get_poster():
     u = User.query.filter_by(email=data['user_email']).first()
     print(u)
     # posts = [p.to_dict() for p in Post.query.all()]
-    return jsonify({ 'message': 'it works' })
+    return jsonify({ 'message': 'work PLEASSEEE' })
     # return jsonify({posts})
 # TEST ROUTE
 
