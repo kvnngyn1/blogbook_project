@@ -3,9 +3,28 @@ from .import bp as api
 from flask import jsonify, request
 from app import db
 from app.blueprints.main.models import Post
+import json
+
+# TEST ROUTE
+@api.route('/poster', methods=['POST'])
+def get_poster():
+    """
+    [POST] /api/poster
+    """
+    data = json.loads(request.data.decode('utf-8'))
+    u = User.query.filter_by(email=data['user_email']).first()
+    print(u)
+    # posts = [p.to_dict() for p in Post.query.all()]
+    return jsonify({ 'message': 'it works' })
+    # return jsonify({posts})
+# TEST ROUTE
+
+
+
+
+
 
 # All posts
-
 @api.route('/posts', methods=['GET'])
 def get_posts():
     """
