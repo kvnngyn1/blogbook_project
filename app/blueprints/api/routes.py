@@ -5,9 +5,11 @@ from app import db
 from app.blueprints.main.models import Post
 import json
 
+
 # TEST ROUTE
 @api.route('/poster', methods=['POST'])
 def get_poster():
+    
     """
     [POST] /api/poster
     """
@@ -15,7 +17,7 @@ def get_poster():
     u = User.query.filter_by(email=data['user_email']).first()
     print(u)
     # posts = [p.to_dict() for p in Post.query.all()]
-    return jsonify({ 'message': 'work PLEASSEEE' })
+    return jsonify([p.to_dict() for p in u.posts.all()])
     # return jsonify({posts})
 # TEST ROUTE
 
